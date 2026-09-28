@@ -6,14 +6,15 @@ document.querySelectorAll(".product-card").forEach(card => {
   const imageButton = card.querySelector(".product-image");
   const front = card.querySelector(".product-front");
   const back = card.querySelector(".product-back");
-  const description = imageButton.getAttribute("aria-label").replace(/^Mostrar costas: /, "");
+  const description = imageButton.getAttribute("aria-label").replace(/^Mostrar [^:]+: /, "");
+  const secondView = imageButton.dataset.secondView || "costas";
   let showingBack = false;
 
   function showBack(value) {
     showingBack = value;
     card.classList.toggle("show-back", value);
     imageButton.setAttribute("aria-pressed", String(value));
-    imageButton.setAttribute("aria-label", `Mostrar ${value ? "frente" : "costas"}: ${description}`);
+    imageButton.setAttribute("aria-label", `Mostrar ${value ? "frente" : secondView}: ${description}`);
     front.setAttribute("aria-hidden", String(value));
     back.setAttribute("aria-hidden", String(!value));
   }
